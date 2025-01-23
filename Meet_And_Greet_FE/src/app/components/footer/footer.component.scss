@@ -1,0 +1,48 @@
+
+@import '../../../assets/styles/colors.scss';
+@import '../../../assets/styles/spacing.scss';
+@import '../../../assets/styles/fonts.scss';
+
+
+.footer {
+  background-color: $primary;
+  color: $secondary;
+  padding: $large-spacing 0;
+
+  a {
+    text-decoration: none;
+    color: $secondary;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $secondary;
+      text-decoration: underline;
+    }
+  }
+
+  h5 {
+    font-size: $large-font-size;
+    margin-bottom: $drop-down-spacing;
+  }
+
+  .footer-links {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+
+    li {
+      margin-bottom: $drop-down-spacing;
+
+      i {
+        margin-right: $drop-down-spacing;
+        font-size: $medium-font-size;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .small {
+    font-size: $extra-small-font-size;
+  }
+
+}

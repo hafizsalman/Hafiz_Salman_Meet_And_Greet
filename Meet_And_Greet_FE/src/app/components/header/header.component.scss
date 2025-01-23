@@ -1,0 +1,155 @@
+@import '../../../assets/styles/fonts.scss';
+@import '../../../assets/styles/spacing.scss';
+@import '../../../assets/styles/colors.scss';
+
+header {
+    padding: $medium-spacing;
+    background-color: $primary;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $header-z-index;
+
+    .logo {
+        width: 9.375rem;
+        height: 5.625rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .logo-container {
+        text-align: center;
+    }
+
+    .desktop-menu {
+        overflow-y: auto;
+
+        ul {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            list-style: none;
+
+            li {
+                list-style-type: none;
+                color: $secondary;
+                display: inline-block;
+                font-size: $medium-font-size;
+                margin-right: $extra-large-spacing;
+
+                &:hover {
+                    color: $header-text-hover;
+                    cursor: pointer;
+                    transition: 0.4s ease-in-out;
+                }
+
+                &.active {
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .login-section {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            color: $secondary;
+            font-size: $medium-font-size;
+            margin-left: $extra-large-spacing;
+            display: inline-block;
+
+            &:hover {
+                color: $header-text-hover;
+                cursor: pointer;
+                transition: 0.4s ease-in-out;
+            }
+
+            &.logout {
+                display: flex;
+                align-items: center;
+
+                i {
+                    margin-right: $small-spacing;
+                }
+            }
+        }
+
+    }
+
+    .menu-icon {
+        display: none;
+    }
+    .login-section {
+        display: flex;
+        align-items: center;
+      }
+
+      .logout {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .logout .logout-text {
+        display: none;
+        position: absolute;
+        left: 100%;
+        white-space: nowrap;
+        color: $header-text-hover;
+      }
+
+      .logout:hover .logout-text {
+        display: inline-block;
+      }
+
+
+    @media screen and (min-width: $small-font-size) and (max-width: $large-font-size) {
+        .desktop-menu {
+            position: fixed;
+            transition: 0.4s ease-in-out;
+            right: -17.5rem;
+            top: $large-spacing;
+            background: $primary;
+            width: 17.5rem;
+            height: 14.375rem;
+            z-index: 1050;
+
+            ul {
+                li {
+                    display: block;
+                    text-align: left;
+                    margin: 0;
+                    padding: $large-spacing 0 $large-spacing $large-spacing;
+                    border-bottom: 0.0625rem solid grey;
+
+                    &.login {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+
+        .menu-icon {
+            display: block;
+            color: $secondary;
+            font-size: $large-font-size;
+            padding-top: $large-spacing;
+            overflow: auto;
+        }
+
+        .mobile_menu {
+            right: 0;
+            transition: 0.4s ease-in-out;
+        }
+    }
+}

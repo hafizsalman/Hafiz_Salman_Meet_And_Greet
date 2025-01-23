@@ -1,0 +1,15 @@
+
+
+<div class="wrapper">
+  <header>
+    <app-header *ngIf="isLoggedIn"></app-header>
+  </header>
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer class="footer">
+    <app-footer *ngIf="isLoggedIn"></app-footer>
+  </footer>
+</div>

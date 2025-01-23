@@ -1,0 +1,44 @@
+@import 'angular-calendar/scss/angular-calendar.scss';
+@import 'ngx-bootstrap/datepicker/bs-datepicker.scss';
+@import './assets/styles/colors.scss';
+
+.cal-time-events {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.cal-day-headers {
+
+  position: sticky;
+  top: 0;
+  background: $background-white;
+  z-index: 100;
+}
+
+.calendar-color {
+  .bs-datepicker-head {
+    background-color: $primary !important;
+    color: $secondary !important;
+  }
+
+  .bs-datepicker-body {
+    background-color: $secondary;
+
+    .selected {
+      background-color: $primary !important;
+      color: $secondary !important;
+    }
+
+    .current {
+      background-color: $secondary !important;
+      color: $primary !important;
+    }
+
+    table td span:hover {
+      background-color: $primary !important;
+      color: white !important;
+
+    }
+  }
+}
+

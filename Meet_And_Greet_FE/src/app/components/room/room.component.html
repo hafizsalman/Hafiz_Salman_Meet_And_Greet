@@ -1,0 +1,96 @@
+<div class="modal custon-model fade show d-block" tabindex="-1" role="dialog" aria-labelledby="roomPopupTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content rounded-lg">
+      <div class="modal-header modal-header-custom">
+        <h5 class="modal-title" id="roomPopupTitle">
+          <i class="bi bi-door-open-fill me-2"></i>{{ room ? 'Edit Room' : 'Add Room' }}
+        </h5>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="close()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="roomForm" (ngSubmit)="save()">
+          <div class="row">
+            <div class="col-md-6 mb-0">
+              <label for="name" class="form-label form-custom">Name</label>
+              <input id="name" type="text" class="form-control" formControlName="name" placeholder="Enter room name" />
+
+              <div class="error-placeholder">
+                <div
+                  *ngIf="(roomForm.controls['name'].touched || roomForm.controls['location'].touched) && errorMessageForNameAndLocation('name')"
+                  class="mb-2" class="text-danger small">
+                  {{errorMessageForNameAndLocation("name")}}
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-6 mb-0">
+              <label for="capacity" class="form-label form-custom">Capacity</label>
+              <input id="capacity" type="number" class="form-control" min="1" formControlName="capacity"
+                placeholder="Enter capacity" />
+              <div class="error-placeholder">
+                <div *ngIf="roomForm.controls['capacity'].invalid && roomForm.controls['capacity'].touched"
+                  class="text-danger small">
+                  {{ roomForm.controls['capacity'].errors?.['min'] ? 'Capacity must not be less than ' +
+                  roomForm.controls['capacity'].errors?.['min'].min : 'Capacity must not exceed ' +
+                  roomForm.controls['capacity'].errors?.['max'].max }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-0">
+              <label for="description" class="form-label form-custom">Description <span
+                  class="optional-label">(Optional)</span></label>
+              <textarea id="description" class="form-control" formControlName="description" rows="2"
+                placeholder="Enter description"></textarea>
+              <div class="error-placeholder">
+                <div *ngIf="roomForm.controls['description'].invalid && roomForm.controls['description'].touched"
+                  class="text-danger small error-placeholder">
+                  Description must not exceed 255 characters.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-0">
+              <label for="location" class="form-label form-custom">Location</label>
+              <input id="location" type="text" class="form-control" formControlName="location"
+                placeholder="Enter location" />
+              <div class="error-placeholder">
+                <div *ngIf="roomForm.controls['location'].touched&& errorMessageForNameAndLocation('location')"
+                  class="mb-2" class="text-danger small error-placeholder">
+                  {{errorMessageForNameAndLocation("location")}}
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6 mb-0">
+              <label for="image" class="form-label form-custom mb-1">Image</label>
+              <input id="image" type="file" class="form-control" (change)="onImageChange($event)"
+                formControlName="image" accept="image/*" />
+              <img *ngIf="imagePreview" [src]="imagePreview" class="img-thumbnail mt-2" alt="Room image preview" />
+              <div class="error-placeholder">
+                <div *ngIf="roomForm.controls['image'].invalid && roomForm.controls['image'].dirty"
+                  class="text-danger small error-placeholder">
+                  Image is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn mt-3 btn-custom" [disabled]="isSaveButtonDisabled">
+              Save Room <i class="bi bi-save me-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

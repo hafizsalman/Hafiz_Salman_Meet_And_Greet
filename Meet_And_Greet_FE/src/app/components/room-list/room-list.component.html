@@ -1,0 +1,140 @@
+<section class="room-list py-5">
+    <div class="container">
+        <div class="row mb-4 align-items-center mb-2">
+            <div class="col-md-8 text-start mb-8 mb-md-0 mb-2">
+                <button class="btn btn-custom shadow btn-menu me-2" (click)="openRoomForm()">
+                    Add Room <i class="bi bi-plus-lg ms-1"></i>
+                </button>
+                <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+                    <div *ngIf="isShowAlert" class="toast show align-items-center text-bg-{{alertType}}  border-0"
+                        role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                {{ alertMessage }} <button *ngIf="isUndoVisible" (click)="undoDelete()"
+                                    class="btn btn-link text-info fw-bold p-0">Undo</button>
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="dismissAlert()"
+                                aria-label="Close"></button>
+                        </div>
+                        <div *ngIf="isUndoVisible" class="progress" style="height: 5px;">
+                            <div class="progress-bar" [style.width.%]="progressPercentage" role="progressbar"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <app-room *ngIf="isRoomFormVisible" [room]="selectedRoom" (saveRoom)="onSaveRoom($event)"
+                    (saveError)="onSaveError($event)">"></app-room>
+                <app-booking *ngIf="isBookingFormVisible" [room]="selectedRoom!" (bookingSaved)="onBookingSaved($event)"
+                    (saveError)="onSaveError($event)">"></app-booking>
+
+                <div class="dropdown d-inline">
+                    <button class="btn btn-custom shadow btn-menu  dropdown-toggle me-0" type="button"
+                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ sortOptionText }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" (click)="sortRoomsByName('asc')"
+                                [ngClass]="{ 'active': sortOption === 'name-asc' }">
+                                Sort Name Asc <i class="bi bi-sort-alpha-down ms-1"></i></a></li>
+                        <li><a class="dropdown-item" (click)="sortRoomsByName('desc')"
+                                [ngClass]="{ 'active': sortOption === 'name-desc' }">
+                                Sort Name Desc <i class="bi bi-sort-alpha-up ms-1"></i></a></li>
+                        <li><a class="dropdown-item" (click)="sortRoomsByCapacity('asc')"
+                                [ngClass]="{ 'active': sortOption === 'capacity-asc' }">
+                                Sort Capacity Asc <i class="bi bi-sort-numeric-down ms-0"></i></a></li>
+                        <li><a class="dropdown-item" (click)="sortRoomsByCapacity('desc')"
+                                [ngClass]="{ 'active': sortOption === 'capacity-desc' }">
+                                Sort Capacity Desc <i class="bi bi-sort-numeric-up ms-0"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-4 text-md-end">
+                <input type="text" class="form-control shadow-custom search-custom" placeholder="Search rooms..."
+                    [(ngModel)]="searchTerm" (input)="filterRooms()" aria-label="Search rooms"
+                    aria-describedby="basic-addon2" />
+            </div>
+        </div>
+
+        <div *ngIf="isNoSearchResults" class="text-center">
+            <p>No rooms found matching your search criteria.</p>
+        </div>
+        <div *ngIf="isLoading" class="d-flex justify-content-center">
+            <div class="spinner-border text-success " role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="row g-4" *ngIf="!isLoading">
+            <div class="col-lg-4 col-md-6" *ngFor="let room of filteredRooms; let i = index">
+                <div class="card h-100 shadow-sm border-1 rounded-lg">
+                    <div class="position-relative">
+                        <img [src]="room.image" class="card-img" [alt]="room.name" />
+                        <button
+                            class="btn btn-primary btn-sm position-absolute top-0 end-0 m-2 rounded-circle edit-delete-btn"
+                            (click)="updateRoom(room)">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+
+                        <button
+                            class="btn btn-danger btn-sm position-absolute top-0 end-0 mt-5 m-2 rounded-circle edit-delete-btn"
+                            (click)="deleteRoom(room,i)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+
+                    <div class="card-body small-text">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title mb-0">{{ room.name }}</h5>
+                            <div class="booking-info ms-3 d-flex flex-wrap align-items-center">
+                                <ng-container *ngIf="roomStatuses[room.id] | async as status">
+                                    <ng-container *ngIf="status.isBookingInProgress">
+                                        <span class="badge rounded-pill text-danger border border-danger mb-1"
+                                            title="{{ getNextFreeTime(room.id) }}">
+                                            <i class="bi bi-alarm-fill"></i> {{ getCurrentMeetingName(room.id) }}
+                                        </span>
+                                    </ng-container>
+
+                                    <ng-container
+                                        *ngIf="status.isMeetingWithin30Minutes && !status.isBookingInProgress">
+                                        <span
+                                            class="badge rounded-pill text-warning border border-warning mb-1 bg-light"
+                                            title="Meeting will start in {{ status.minutesUntilNextMeeting }} minutes">
+                                            <i class="bi bi-clock-fill"></i> {{ status.nextMeetingName }} in {{
+                                            status.minutesUntilNextMeeting }} min
+                                        </span>
+                                    </ng-container>
+
+                                    <ng-container
+                                        *ngIf="hasUpcomingBookings(room) && !status.isMeetingWithin30Minutes && !status.isBookingInProgress">
+                                        <span class="badge rounded-pill text-success border border-success mb-1"
+                                            title="Free until {{ status.nextMeetingTime }}">
+                                            <i class="bi bi-clock-fill"></i> {{ status.nextMeetingName }}
+                                        </span>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>
+                                <i class="bi bi-geo-alt"></i> {{ room.location }}
+                            </span>
+                            <span>
+                                <i class="bi bi-people"></i> {{ room.capacity }}
+                            </span>
+                        </div>
+                        <p class="card-text text-base description-truncate">
+                            {{ room.description }}
+                        </p>
+
+                    </div>
+                    <div class="card-footer d-flex justify-content-between  ">
+                        <button class="btn btn-custom shadow btn-sm ms-auto"
+                            (click)=" openBookingForm(room)">Book</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

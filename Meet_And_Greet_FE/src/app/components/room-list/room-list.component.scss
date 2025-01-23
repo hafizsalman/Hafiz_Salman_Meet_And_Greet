@@ -1,0 +1,143 @@
+@import '../../../assets/styles/fonts.scss';
+@import '../../../assets/styles/spacing.scss';
+@import '../../../assets/styles/colors.scss';
+
+.room-list {
+    background-color: $secondary;
+    margin-top: $room-list-margin-top;
+    position: relative;
+    padding-bottom: $large-spacing;
+
+    .card {
+        transition: transform 0.2s ease-in-out;
+        z-index: 100;
+
+        &:hover {
+            transform: translateY(-$small-spacing);
+
+            .edit-delete-btn {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        .card-img {
+            height: 12.5rem;
+            object-fit: cover;
+            border-color: $primary;
+            border: 0.0625rem solid $card-footer;
+        }
+
+        .edit-delete-btn {
+
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    .card-title {
+        color: $primary;
+    }
+
+    .btn {
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            transform: translateY(-$small-spacing / 2);
+        }
+    }
+
+    .btn-custom {
+        background-color: $primary;
+        color: $secondary;
+        border: none;
+        padding: $small-spacing $large-spacing;
+        border-radius: $small-spacing;
+        box-shadow: 0 $medium-spacing $large-spacing rgba(0, 0, 0, 0.1);
+        font-size: $small-font-size;
+    }
+
+    .btn-custom:hover {
+        background-color: darken($primary, 10%);
+        color: $secondary;
+        text-decoration: none;
+    }
+
+    .btn-custom:focus {
+        outline: none;
+        box-shadow: 0 0 0 $small-spacing rgba($primary, 0.2);
+    }
+
+    .shadow-custom {
+        border: 0.0625rem solid $primary;
+        border-radius: $small-spacing;
+        padding: $medium-spacing;
+        box-shadow: 0 $small-spacing $medium-spacing rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    }
+
+    .shadow-custom:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 $small-spacing rgba($primary, 0.2);
+        outline: none;
+    }
+
+    .search-custom {
+        border: 0.0625rem solid $primary;
+        color: $primary;
+    }
+
+    .dropdown-item {
+        cursor: pointer;
+    }
+
+    .dropdown-item.active,
+    .dropdown-item:focus,
+    .dropdown-item:hover {
+        background-color: $primary;
+        color: $secondary;
+    }
+
+    .btn-outline-primary:hover,
+    .btn-outline-primary:focus {
+        background-color: $primary;
+        color: $secondary;
+    }
+
+    .btn-menu {
+        width: $menu-button-width;
+    }
+
+    .card-footer {
+        background-color: $card-footer;
+    }
+
+    .dropdown-menu .dropdown-item {
+        padding: 0 $drop-down-spacing 0 $drop-down-spacing;
+    }
+
+    .progress {
+        background-color: $progress-bar-bg;
+    }
+
+    .progress-bar {
+        background-color: $progress-bar-color;
+        transition: width 0.05s linear;
+    }
+
+    .small-text {
+        font-size: $extra-small-font-size;
+    }
+    .badge {
+        font-size: $min-font-size;
+        padding: $small-spacing;
+        display: inline-flex;
+        align-items: center;
+        background-color: $card-footer;
+        font-weight: normal;
+        .bi {
+            margin-right: $drop-down-spacing;
+          }
+      }
+
+}

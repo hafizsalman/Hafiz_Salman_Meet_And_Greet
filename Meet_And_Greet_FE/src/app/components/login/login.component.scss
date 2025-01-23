@@ -1,0 +1,127 @@
+@import '../../../assets/styles/fonts.scss';
+@import '../../../assets/styles/spacing.scss';
+@import '../../../assets/styles/colors.scss';
+
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: darken($primary, 5%);
+
+    .logo {
+        width: $logo-size;
+        height: $logo-size;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.login-card {
+    background: $background-white;
+    padding: $login-padding;
+    border-radius: $login-card-btn-radius;
+    box-shadow: 0 $small-spacing $small-spacing $black;
+    max-width: $max-width-login-card;
+    width: 100%;
+    text-align: center;
+}
+
+.login-header {
+    margin-bottom: $login-margin-bottom;
+}
+
+.login-title {
+    font-size: $login-title-font-size;
+    font-weight: bold;
+    color: $primary;
+}
+
+.login-subtitle {
+    font-size: $login-subtitle-font-size;
+    color: $background-subtitle;
+}
+
+.form-group {
+    margin-bottom: $form-group-margin-bottom;
+    text-align: left;
+    position: relative;
+}
+
+.form-group label {
+    font-size: $form-group-label-font-size;
+}
+
+.form-control {
+    border: $form-control-border;
+    border-radius: $form-control-border-radius;
+    padding: $form-control-padding;
+    font-size: $form-control-font-size;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: $form-control-focus-border-color;
+    box-shadow: 0 0 $focus-shadow-blur $focus-shadow-color;
+}
+
+.invalid-feedback {
+    font-size: $invalid-feedback-font-size;
+    color: $invalid-feedback-color;
+}
+
+.login-btn {
+    background-color: $primary;
+    color: $background-white;
+    border: none;
+    padding: $login-btn-padding;
+    font-size: $login-btn-font-size;
+    border-radius: $login-btn-border-radius;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: darken($primary, 5%);
+}
+
+.signup-link {
+    color: $signup-link-color;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.signup-link:hover {
+    color: $signup-link-hover-color;
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+
+.alert {
+    background-color: $alert-background-color;
+    color: $alert-color;
+    border-radius: $alert-border-radius;
+    padding: $alert-padding;
+    margin-bottom: $alert-margin-bottom;
+}
+
+
+.input-group-text {
+    cursor: pointer;
+}
+
+.input.form-control {
+    padding-right: $padding-right-form-control;
+}
+
+.form-label-color {
+    font-size: $extra-small-font-size;
+}
+
+.error-placeholder {
+    height: $error-place-holder-height;
+}

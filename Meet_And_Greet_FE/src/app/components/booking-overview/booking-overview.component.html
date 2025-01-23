@@ -1,0 +1,128 @@
+<div class="main-container">
+    <div class="container pt-4">
+        <div class="text-center mb-0 header-text">
+            <h5 class="display-8">
+                <ng-container *ngIf="viewMode === 'day'">
+                    {{ currentDate | date: 'EEEE, MMM d' }}
+                </ng-container>
+                <ng-container *ngIf="viewMode === 'week'">
+                    {{ currentWeekStart | date: 'MMM d' }} - {{ currentWeekEnd | date: 'MMM d' }}
+                </ng-container>
+                <ng-container *ngIf="viewMode === 'list'">
+                    {{ currentDate | date: 'MMM y' }}
+                </ng-container>
+            </h5>
+        </div>
+
+        <div class="control-panel mb-2">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="btn-group" role="group" aria-label="View switcher">
+                        <button type="button" class="btn btn-outline-primary" [class.active]="viewMode === 'list'"
+                            (click)="changeView('list')">List</button>
+                        <button type="button" class="btn btn-outline-primary" [class.active]="viewMode === 'day' && !isTodaySelected"
+                            (click)="changeView('day')">Day</button>
+                        <button type="button" class="btn btn-outline-primary" [class.active]="viewMode === 'week'"
+                            (click)="changeView('week')">Week</button>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-secondary" (click)="goBack()">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" [class.active]="isTodaySelected"
+                            (click)="changeView('today')">Today</button>
+                        <button type="button" class="btn btn-outline-secondary" (click)="goForward()">
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="d-flex align-items-center me-auto">
+                            <div class="form-check form-switch me-2 mt-1">
+                                <input class="form-check-input toggelMyBookings custom-switch" type="checkbox"
+                                    id="toggleMyBookings" [(ngModel)]="showMyBookings"
+                                    (ngModelChange)="changeView(null)">
+                                <label class="form-check-label" for="toggleMyBookings">Show My Bookings</label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <h5 class="mb-0 me-3 text-center header-text">{{ currentDate | date: 'MMMM yyyy' }}</h5>
+                            <div class="date-picker-container btn-group">
+                                <button class="btn" #dp="bsDatepicker" bsDatepicker [bsConfig]="bsConfig"
+                                    (bsValueChange)="onDateChange($event)">
+                                    <i class="bi bi-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <ng-container [ngSwitch]="viewMode">
+            <div *ngSwitchCase="'list'" class="list-view mb-0">
+                <div class="list-view-scroll mb-0">
+                    <div *ngFor="let group of getGroupedBookings()" class="mb-4">
+                        <div class="group-header">
+                            <h6 class="mb-0">{{ group.date | date: 'MMM d' }}</h6>
+                            <span>{{ group.date | date: 'EEEE' }}</span>
+                        </div>
+                        <ul class="list-group">
+                            <li *ngFor="let booking of group.bookings" class="list-group-item list-group-item-action">
+                                <div class="d-flex justify-content-between align-items-start"
+                                    (click)="openBookingForm(booking)">
+                                    <small class="text-muted text-end flex-shrink-0">{{ booking.startTime | date:
+                                        'HH:mm' }}
+                                        - {{ booking.endTime | date: 'HH:mm' }}</small>
+                                    <h6 class="mb-1 ms-3 flex-grow-1 text-truncate">{{ booking.name }}</h6>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-container" *ngIf="viewMode !== 'list'" #calendarContainer>
+                <div *ngSwitchCase="'day'">
+                    <mwl-calendar-day-view [viewDate]="currentDate" [events]="filteredEvents()" [refresh]="refresh"
+                        (eventClicked)="openBooking($event)" [dayStartHour]="0" [dayEndHour]="23">
+                    </mwl-calendar-day-view>
+                </div>
+
+                <div *ngSwitchCase="'week'">
+                    <mwl-calendar-week-view [viewDate]="currentDate" [events]="filteredEvents()" [refresh]="refresh"
+                        (eventClicked)="openBooking($event)" [hourSegments]="2" [hourSegmentHeight]="30"
+                        [dayStartHour]="0" [dayEndHour]="23" [weekStartsOn]="1">
+                    </mwl-calendar-week-view>
+                </div>
+            </div>
+        </ng-container>
+
+        <app-booking *ngIf="isBookingFormVisible" [booking]="selectedBooking" (bookingSaved)="onBookingSaved($event)"
+            (saveError)="onSaveError($event)" (bookingDeleted)="onBookingDeleted()"
+            (deleteError)="onDeleteError($event)">
+        </app-booking>
+
+        <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+            <div *ngIf="isShowAlert" class="toast show align-items-center text-bg-{{alertType}}  border-0" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ alertMessage }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="dismissAlert()"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+

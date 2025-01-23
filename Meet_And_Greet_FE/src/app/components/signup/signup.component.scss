@@ -1,0 +1,106 @@
+@import '../../../assets/styles/fonts.scss';
+@import '../../../assets/styles/spacing.scss';
+@import '../../../assets/styles/colors.scss';
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: darken($primary, 5%);
+
+    .logo {
+        width: $logo-size;
+        height: $logo-size;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.signup-card {
+    background: $background-white;
+    padding: $login-padding;
+    border-radius: $login-card-btn-radius;
+    box-shadow: 0 $small-spacing $small-spacing $black;
+    max-width: $max-width-signup-card;
+    width: 100%;
+    text-align: center;
+}
+
+.signup-title {
+    font-size: $login-title-font-size;
+    font-weight: bold;
+    color: $primary;
+}
+
+.signup-subtitle {
+    font-size: $login-subtitle-font-size;
+    color: $background-subtitle;
+}
+
+.form-group {
+    margin-bottom: $form-group-margin-bottom;
+    text-align: left;
+}
+
+.form-control {
+    border: $form-control-border;
+    border-radius: $form-control-border-radius;
+    padding: $form-control-padding;
+    font-size: $form-control-font-size;
+    transition: border-color 0.3s ease;
+
+    &.is-invalid {
+        border-color: $danger-color;
+    }
+}
+
+.signup-btn {
+    background-color: $primary;
+    color: $background-white;
+    border: none;
+    padding: $login-btn-padding;
+    font-size: $login-btn-font-size;
+    border-radius: $login-btn-border-radius;
+    transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+    background-color: darken($primary, 5%);
+}
+
+.login-link {
+    color: $signup-link-color;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+        color: $signup-link-hover-color;
+        cursor: pointer;
+    }
+}
+
+.error-placeholder {
+    height: $error-place-holder-height;
+}
+
+.message-placeholder {
+    height: $signup-error-place-holder-height;
+}
+
+.input-group-text {
+    cursor: pointer;
+}
+
+.progress {
+    height: $small-spacing;
+    background-color: $progress-bar-bg-color;
+    border-radius: $login-btn-border-radius;
+  }
+
+  .progress-bar {
+    transition: width 0.5s ease-in-out;
+  }

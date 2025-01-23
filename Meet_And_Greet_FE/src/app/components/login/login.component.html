@@ -1,0 +1,74 @@
+<div class="login-container" *ngIf="!isServer">
+    <div class="login-card">
+        <div class="logo-container">
+            <img src="assets/images/logo-non-tsp.png" alt="logo" class="logo">
+        </div>
+        <div class="login-header">
+            <h3 class="login-title">Welcome Back</h3>
+            <p class="login-subtitle">Please log in to your account</p>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+
+            <div class="form-group mb-0">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email" class="form-control"
+                    [ngClass]="{'is-invalid': formControls['email'].invalid && formControls['email'].touched}"
+                    placeholder="Enter your email" />
+                <div class="error-placeholder">
+                    <div *ngIf="formControls['email'].invalid && formControls['email'].touched" class="invalid-feedback"
+                        class="text-danger small error-placeholder">
+                        <span *ngIf="formControls['email'].errors?.['required']">Email is required.</span>
+                        <span *ngIf="formControls['email'].errors?.['email']">Please enter a valid email address.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="password" class="form-label-color">Password</label>
+                <div class="input-group">
+                    <input [type]="isPasswordVisible ? 'text' : 'password'" id="password" formControlName="password"
+                        class="form-control"
+                        [ngClass]="{'is-invalid': formControls['password'].invalid && formControls['password'].touched}"
+                        placeholder="Enter your password" />
+
+                    <span class="input-group-text toggle-password" (click)="togglePasswordVisibility()">
+                        <i [ngClass]="isPasswordVisible ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                    </span>
+                </div>
+                <div class="error-placeholder">
+                    <div *ngIf="formControls['password'].invalid && formControls['password'].touched" class="invalid-feedback"
+                        class="text-danger small error-placeholder">
+                        <span *ngIf="formControls['password'].errors?.['required']">Password is required.</span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn login-btn w-100" [disabled]="loginForm.invalid || isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                Login
+            </button>
+        </form>
+
+          <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+            <div *ngIf="isShowAlert" class="toast show align-items-center text-bg-success  border-0" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ notificationMessage }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="dismissAlert()"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <p>Don't have an account? <a (click)="navigateToSignup()" class="signup-link">Sign up here</a></p>
+        </div>
+    </div>
+</div>

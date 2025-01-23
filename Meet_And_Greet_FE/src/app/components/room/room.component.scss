@@ -1,0 +1,59 @@
+@import '../../../assets/styles/colors.scss';
+@import '../../../assets/styles/spacing.scss';
+@import '../../../assets/styles/fonts.scss';
+
+.custon-model {
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-header-custom {
+  background-color: $primary;
+  color: $secondary;
+}
+
+.modal-header-custom:hover {
+  color: $header-text-hover;
+}
+
+.form-custom {
+  color: $primary;
+
+}
+
+.form-control {
+  background-color: $secondary;
+  border: 0.02rem solid $primary;
+}
+
+.error-placeholder {
+  height: 25px;
+}
+
+.optional-label {
+  color: $black;
+  font-weight: normal;
+  font-size: $extra-small-font-size;
+}
+
+.btn-custom {
+  background-color: $primary;
+  color: $secondary;
+  border: none;
+  padding: $small-spacing $large-spacing;
+  border-radius: $small-spacing;
+  box-shadow: 0 $medium-spacing $large-spacing rgba(0, 0, 0, 0.1);
+  font-size: $small-font-size;
+}
+
+.btn-custom:hover {
+  background-color: darken($primary, 10%);
+  color: $secondary;
+  text-decoration: none;
+}
+
+.btn-custom:focus {
+  outline: none;
+  box-shadow: 0 0 0 $small-spacing rgba($primary, 0.2);
+}

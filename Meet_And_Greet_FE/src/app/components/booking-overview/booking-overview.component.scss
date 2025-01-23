@@ -1,0 +1,151 @@
+@import '../../../assets/styles/colors.scss';
+@import '../../../assets/styles/spacing.scss';
+@import '../../../assets/styles/fonts.scss';
+
+.container {
+  .btn-group {
+    button {
+      margin-right: $booking-spacing-xs;
+      border-color: $primary;
+      color: $primary;
+
+      &.active {
+        background-color: $primary;
+        color: $booking-white;
+      }
+
+      &:hover {
+        background-color: $primary;
+        color: $booking-white;
+      }
+    }
+  }
+
+  .header-text {
+    color: $primary;
+  }
+
+  .toggelMyBookings {
+    &.active {
+      color: $primary;
+    }
+  }
+
+  .list-view {
+    padding: $booking-spacing-lg;
+    background-color: $secondary;
+    border-radius: $booking-border-radius-lg;
+    box-shadow: $booking-shadow-md;
+
+    .group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $booking-spacing-lg;
+      color: $primary;
+
+      h5 {
+        font-size: $booking-font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $primary;
+      }
+
+      span {
+        font-size: $booking-font-size-md;
+        color: darken($primary, 10%);
+      }
+    }
+
+    .list-group {
+      .list-group-item {
+        background-color: $booking-list-bg;
+        border: none;
+        border-radius: $booking-border-radius-md;
+        padding: $booking-spacing-lg;
+        margin-bottom: $booking-spacing-sm;
+        box-shadow: $booking-shadow-sm;
+        transition: background-color $booking-transition-default, transform $booking-transition-default, color $booking-transition-default;
+
+        &:hover {
+          background-color: darken($card-footer, 20%);
+          transform: translateY(-$booking-spacing-xs);
+          color: $booking-white;
+          text-emphasis-color: $booking-white;
+          cursor: pointer;
+
+          h6,
+          small,
+          .text-muted {
+            color: $booking-white !important;
+          }
+        }
+
+        h6 {
+          font-size: $booking-font-size-lg;
+          font-weight: $font-weight-bold;
+          color: $booking-gray-dark;
+        }
+
+        small {
+          font-size: $booking-font-size-sm;
+          color: $booking-gray-light;
+          flex-shrink: 0;
+          text-align: right;
+          margin-right: $booking-spacing-lg;
+          width: $booking-time-width;
+        }
+      }
+    }
+  }
+
+  .custom-switch {
+    &:checked {
+      background-color: $primary;
+      border-color: $primary;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem $secondary;
+      border-color: $primary;
+    }
+
+    &:active {
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+}
+
+.main-container {
+  background-color: $secondary;
+  padding-top: $booking-header-height;
+  min-height: 100%;
+}
+
+.list-view-scroll {
+  height: $booking-list-view-height;
+  overflow-y: auto;
+}
+
+.cal-day-view,
+.cal-week-view {
+  height: $booking-list-view-height;
+  overflow-y: auto;
+}
+
+.event-card {
+  padding: $booking-spacing-md;
+  border-radius: $booking-border-radius-sm;
+  border-width: $booking-border-width;
+}
+
+.calendar-container {
+  height: $booking-list-view-height;
+  overflow-y: auto;
+}
+
+::ng-deep {
+  .cal-week-view {
+    height: $booking-full-percentage;
+  }
+}

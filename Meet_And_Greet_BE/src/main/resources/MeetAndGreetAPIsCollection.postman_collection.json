@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "4f1c83a0-d500-4a6e-ba0c-a98f817ad46d",
+		"name": "MeetAndGreetAPIsCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37450683"
+	},
+	"item": [
+		{
+			"name": "Room",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/rooms",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/rooms/ee1558fc-9de3-4799-8af3-08455aa388f7",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"rooms",
+								"ee1558fc-9de3-4799-8af3-08455aa388f7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/rooms/715d7b55-248b-455f-ae52-4854bab39242",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"rooms",
+								"715d7b55-248b-455f-ae52-4854bab39242"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"desc 1\",\r\n    \"location\": \"floor 1\",\r\n    \"capacity\": 1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/rooms",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"room 2\",\r\n    \"description\": \"desc 1\",\r\n    \"location\": \"floor 1\",\r\n    \"capacity\": 2\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/rooms/47a90eff-97a2-4cde-b069-518552b41ac8",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"rooms",
+								"47a90eff-97a2-4cde-b069-518552b41ac8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/users/id/eb0de204-4577-4173-ada3-c2917dd0fc39",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"id",
+								"eb0de204-4577-4173-ada3-c2917dd0fc39"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByEmail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/email/salman@gmail.com",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"email",
+								"salman@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/5f6838a1-b905-4b6b-bf61-2dce059bdeb1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"5f6838a1-b905-4b6b-bf61-2dce059bdeb1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"65326232-6636-6134-2d66-636264000000\",\r\n    \"firstName\": \"abc\",\r\n    \"password\": \"123424535\",\r\n    \"email\": \"salman1@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"salman2\",\r\n    \"password\": \"123424535\",\r\n    \"email\": \"salman1@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/5f6838a1-b905-41b6b-bf61-2dce059bdeb1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"5f6838a1-b905-41b6b-bf61-2dce059bdeb1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/bookings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/5f6838a1-b905-4b6b-bf61-2dce059bdeb1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"5f6838a1-b905-4b6b-bf61-2dce059bdeb1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByRoomId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/room/5f6838a1-b905-4b6b-bf61-2dce059bdeb1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"room",
+								"5f6838a1-b905-4b6b-bf61-2dce059bdeb1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/user/5f6838a1-b905-4b6b-bf61-2dce059bdeb1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"user",
+								"5f6838a1-b905-4b6b-bf61-2dce059bdeb1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/5f6838a1-b905-4b6b-bf61-2dce059bdeb1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"5f6838a1-b905-4b6b-bf61-2dce059bdeb1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"\",\r\n  \"startTime\": \"2024-08-10T11:00:00\",\r\n  \"endTime\": \"2024-08-10T12:00:00\",\r\n  \"user\": {\r\n    \"id\":\"609cacba-9b7a-46a2-ba4b-ed4710724097\"\r\n  },\r\n  \"room\": {\r\n    \"id\": \"ee1558fc-9de3-4799-8af3-08455aa388f7\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/bookings",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Conference Room A\",\r\n  \"startTime\": \"2024-08-10T09:00:00\",\r\n  \"endTime\": \"2024-08-10T11:00:00\",\r\n  \"userId\": \"609cacba-9b7a-46a2-ba4b-ed4710724097\",\r\n  \"roomId\": \"ee1558fc-9de3-4799-8af3-08455aa388f7\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/bookings/4bc464b4-e9c3-417e-b4fe-cec0a51d4403",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"bookings",
+								"4bc464b4-e9c3-417e-b4fe-cec0a51d4403"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "localhost:8080/meetandgreet/api",
+			"type": "string"
+		}
+	]
+}
